@@ -2,9 +2,9 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./context/authContext";
 
-import Profile from "./Pages/Profile";
-import Home from "./Pages/Home";
-import NotFound from "./Pages/NotFound";
+import Profile from "./components/Profile";
+import Home from "./components/Home";
+import NotFound from "./components/NotFound";
 
 function App() {
   return (
