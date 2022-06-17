@@ -4,7 +4,7 @@ import {
     signInWithPopup,
     signOut
 } from "firebase/auth";
-import { auth } from "../firebase/config";
+import { auth } from "../Firebase/config";
 
 
 export const authContext = createContext();

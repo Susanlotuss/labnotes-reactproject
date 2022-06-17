@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { saveNotes, updateNotes } from "../firebase/api";
+import { saveNotes, updateNotes } from "../Firebase/api";
 
 const initialStateValue = {
   user: "",
@@ -8,26 +8,27 @@ const initialStateValue = {
   description: ""
 };
 
-export default function Modal() {
+export default function Modal({getMyNotes}) {
 
   const [showModal, setShowModal] = React.useState(false);
 
   const [noteData, setNoteData] = useState(initialStateValue);
-
-  const handleInputChange = e => {
-    const {name, value} = e.target;
-    setNoteData({...noteData, [name]: value})
-  }
 
   const handleSave = async e => {
     e.preventDefault();
 
     if (!noteData.id) {
       await saveNotes(noteData);
+      getMyNotes();
     } else {
       await updateNotes(noteData.id, noteData);
     }
-    setNoteData({...initialStateValue})
+    setNoteData({...initialStateValue});
+  }
+
+  const handleInputChange = e => {
+    const {name, value} = e.target;
+    setNoteData({...noteData, [name]: value})
   }
 
 
@@ -86,12 +87,6 @@ export default function Modal() {
                     type="button"
                     onClick={handleSave}>
                     Save
-                  </button>
-                  <button
-                    className="bg-orange-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                    type="button"
-                    onClick={() => setShowModal(false)}>
-                    Edit
                   </button>
                 </div>
               </div>

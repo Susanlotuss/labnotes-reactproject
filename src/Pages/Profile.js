@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useAuth } from "../context/authContext";
-
+import { useAuth } from "../Context/authContext";
 import { useNavigate } from "react-router-dom";
 
-import  Modal  from "../components/notes";
-import { getNotes } from "../firebase/api";
-import Note from "./note";
+import  Modal  from "../components/NotesModal";
+import { getNotes } from "../Firebase/api";
+import Note from "../components/NoteInfo";
 
 //import blueWool from "../img/blue-wool2.jpg";
 
@@ -25,9 +24,9 @@ function Profile() {
     }
   };
 
-  const getMyNotes = async (id) => {
+  const getMyNotes = async () => {
     const docs = [];
-    const doc = await getNotes(id);
+    const doc = await getNotes();
     doc.forEach(doc => { docs.push(doc.data()) });
     setNotes(docs)
     console.log(docs)
@@ -41,7 +40,7 @@ useEffect(() => {
     return (
       <>
         <div>
-          <Modal />
+          <Modal getMyNotes={getMyNotes} />
             <h1>MY NOTES</h1>
               <div>
                 <button
@@ -54,7 +53,7 @@ useEffect(() => {
             {
               notes.map((note, index) => (
             //    <h1>{note.title}</h1>
-                <Note key={index} title={note.title}/>
+                <Note key={index} title={note.title} description={note.description} user={note.user} />
               ) 
 
               )
