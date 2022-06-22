@@ -10,7 +10,7 @@ const initialStateValue = {
 
 export default function Modal({getMyNotes}) {
 
-  const [showModal, setShowModal] = React.useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   const [noteData, setNoteData] = useState(initialStateValue);
 
@@ -37,11 +37,10 @@ export default function Modal({getMyNotes}) {
       <button
         className="bg-pink-500 text-white active:bg-pink-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
         type="button"
-        onClick={() => setShowModal(true)}
-      >
+        onClick={() => setShowModal(true)}>
         ADD A NOTE
       </button>
-      {showModal ? (
+        {showModal ? (
         <>
           <div
             className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
