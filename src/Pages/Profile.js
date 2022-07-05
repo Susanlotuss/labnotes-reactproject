@@ -6,7 +6,8 @@ import  Modal  from "../components/NotesModal";
 import { getNotes } from "../Firebase/api";
 import Note from "../components/NoteInfo";
 
-//import blueWool from "../img/blue-wool2.jpg";
+import blueWool from "../img/prof11.jpg";
+import myN from "../img/titleP.png";
 
 function Profile() {
 
@@ -25,12 +26,10 @@ function Profile() {
   };
 
   const getMyNotes = async () => {
-    const docs = [];
+    const myDocs = [];
     const doc = await getNotes();
-    doc.forEach(doc => { docs.push(doc.data()) });
-    setNotes(docs)
-    console.log(docs)
-    
+    doc.forEach(doc => { myDocs.push({...doc.data(), id: doc.id}) });
+    setNotes(myDocs)
 }
 
 useEffect(() => {
@@ -40,26 +39,40 @@ useEffect(() => {
     return (
       <>
         <div>
-          <Modal getMyNotes={getMyNotes} />
-            <h1>MY NOTES</h1>
-              <div>
-                <button
-                  className="bg-slate-200 hover:bg-slate-300 rounded py-2 px-4 text-black"
-                  onClick={handleLogout}>
-                  Logout
-                </button>
-              </div>
-            </div>
-            {
-              notes.map((note, index) => (
-            //    <h1>{note.title}</h1>
-                <Note key={index} title={note.title} description={note.description} user={note.user} />
-              ) 
-
-              )
-            }
+          <img
+            src={blueWool}
+            alt="woolImage"
+            style={{
+              padding: 0,
+              height: "100vh",
+              position: "absolute",
+              objectFit: "cover",
+              zIndex: "-1",
+            }}
+          />
+          <button
+            className="bg-slate-200 hover:bg-slate-300 rounded py-2 px-4 text-black"
+            onClick={handleLogout}
+          >
+            LogOut 
+          </button>
+          <div>
+            <img src={myN} alt="woolTitle" style={{alignSelf: "center"}}/>
+            <Modal getMyNotes={getMyNotes} />
+          </div>
+        </div>
+        {notes.map((note, index) => (
+          // Only do this if items have no stable IDs. No usar índices para keys si el orden de los ítems puede cambiar.
+          // <h1>{note.title}</h1>
+          <Note
+            key={index}
+            title={note.title}
+            description={note.description}
+            user={note.user}
+            id={note.id}
+          />
+        ))}
       </>
-    
     );
     
   }

@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { saveNotes, updateNotes } from "../Firebase/api";
+import { saveNotes } from "../Firebase/api";
 
 const initialStateValue = {
   user: "",
@@ -20,8 +20,6 @@ export default function Modal({getMyNotes}) {
     if (!noteData.id) {
       await saveNotes(noteData);
       getMyNotes();
-    } else {
-      await updateNotes(noteData.id, noteData);
     }
     setNoteData({...initialStateValue});
   }
@@ -35,10 +33,10 @@ export default function Modal({getMyNotes}) {
   return (
     <>
       <button
-        className="bg-pink-500 text-white active:bg-pink-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+        className="bg-pink-500 text-white active:bg-pink-600 font-bold uppercase text-xl px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
         type="button"
         onClick={() => setShowModal(true)}>
-        ADD A NOTE
+        +
       </button>
         {showModal ? (
         <>
