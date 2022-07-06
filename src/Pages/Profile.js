@@ -44,27 +44,37 @@ useEffect(() => {
             alt="woolImage"
             style={{
               padding: 0,
-              height: "100vh",
+              height: "100%",
               position: "absolute",
               objectFit: "cover",
               zIndex: "-1",
             }}
           />
+          <footer
+            className="bg-red-800
+             text-1xl text-white text-center
+             border-t-4 border-red-900
+             fixed
+             inset-x-0
+             bottom-0
+             p-4">
           <button
-            className="bg-slate-200 hover:bg-slate-300 rounded py-2 px-4 text-black"
+            className="bg-violet-600 hover:bg-slate-300 rounded py-2 px-4 text-white text-2xl font-serif"
             onClick={handleLogout}
           >
             LogOut 
           </button>
+          </footer>
           <div>
-            <img src={myN} alt="woolTitle" style={{alignSelf: "center"}}/>
+            <img src={myN} alt="woolTitle" style={{marginLeft:"15rem", marginBottom:"6rem", paddingTop: "4rem"}}/>
             <Modal getMyNotes={getMyNotes} />
           </div>
         </div>
         {notes.map((note, index) => (
           // Only do this if items have no stable IDs. No usar índices para keys si el orden de los ítems puede cambiar.
           // <h1>{note.title}</h1>
-          <Note
+          <Note 
+            getMyNotes={getMyNotes}
             key={index}
             title={note.title}
             description={note.description}
